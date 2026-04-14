@@ -1,9 +1,15 @@
-name: "Teste de orkflow 01x" 
+name: "Teste de orkflow 01x"
 
 on:
   push:
     branches:
-     - main
+      - main
+  workflow_dispatch:
+    inputs:
+      ambiente:
+        description: 'Onde fazer o deploy?'
+        required: true
+        default: 'homologacao'
 
 jobs:
   job1:
@@ -11,13 +17,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
       - name: "Exibir mensagem de teste"
         run: |
-          echo "Este e um teste de workflow"
+          echo "Este é um teste de workflow"
           ls -la
-          
-job2:
+          echo "Ambiente selecionado: ${{ github.event.inputs.ambiente }}"
+
+  job2:
     name: "Job de Teste 02"
     runs-on: ubuntu-latest
     needs: job1  # O job2 só executa após o job1 concluir
@@ -26,4 +32,5 @@ job2:
       - name: "Mensagem após o Job 1"
         run: |
           echo "Job 2 executado após o Job 1"
+          echo "Deploy no ambiente: ${{ github.event.inputs.ambiente }}"
           ls -la
