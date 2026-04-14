@@ -1,1 +1,18 @@
+name: "Teste de orkflow 01x" 
 
+on:
+  push:
+    branches:
+     - main
+
+jobs:
+  job1:
+    name: "Job de Teste 01"
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: "Exibir mensagem de teste"
+        run: |
+          echo "Este e um teste de workflow"
+          ls -la
