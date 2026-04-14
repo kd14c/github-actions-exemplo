@@ -16,3 +16,14 @@ jobs:
         run: |
           echo "Este e um teste de workflow"
           ls -la
+          
+job2:
+    name: "Job de Teste 02"
+    runs-on: ubuntu-latest
+    needs: job1  # O job2 só executa após o job1 concluir
+
+    steps:
+      - name: "Mensagem após o Job 1"
+        run: |
+          echo "Job 2 executado após o Job 1"
+          ls -la
